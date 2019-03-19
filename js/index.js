@@ -1,70 +1,57 @@
-var app = new Vue({
-  el: "#app",
-  data: function () {
-    return {
-      userPick: null,
-      randPick: null,
-      userScore: 0,
-      computerScore: 0
-    };
+new Vue({
+  data(){
+    return{
+      megha: '',
+      computer: '',
+      isStart: false
+    }
   },
-  methods: {
-    choose: function (pick) {
-      this.userPick = pick;
-      const picks = ['rock', 'paper', 'scissors'];
-      this.randPick = picks[Math.floor(Math.random() * picks.length)];
-      this.setScore();
-    },
-    setScore: function () {
-      if (this.userPick == 'rock') {
-        if (this.randPick == 'paper') {
-          console.log('Computer wins');
-          this.computerScore++;
-        } else if (this.randPick == 'scissors') {
-          console.log('User wins');
-          this.userScore++;
+  computed:{
+    determineWinner() {
+      var vm = this, userChoice = vm.megha, getComputerChoice = vm.computer
+      if (userChoice === getComputerChoice) {
+        return "game was a tie!";
+      }
+
+      if (userChoice === "rock") {
+        if (getComputerChoice === "paper") {
+          return "computer won!";
         } else {
-          console.log('Draw');
+          return "megha won!";
         }
-      } else if (this.userPick == 'paper') {
-        if (this.randPick == 'rock') {
-          console.log('User wins');
-          this.userScore++;
-        } else if (this.randPick == 'scissors') {
-          console.log('Computer wins');
-          this.computerScore++;
-        } else {
-          console.log('Draw');
+      }
+
+      if (userChoice === "paper") {
+        if (getComputerChoice === "scissors") {
+          return "computer won!";
+        }else{
+          return "megha won!";
         }
-      } else {
-        if (this.randPick == 'rock') {
-          console.log('Computer wins');
-          this.computerScore++;
-        } else if (this.randPick == 'paper') {
-          console.log('User wins');
-          this.userScore++;
-        } else {
-          console.log('Draw');
+
+      }
+
+      if (userChoice === "scissors") {
+        if (getComputerChoice === "rock") {
+          return "computer won";
+        }
+        else {
+          return "megha won!";
         }
       }
     }
   },
-  computed: {
-    computedUser: function () {
-      return {
-        "fa-circle-o-notch fa-spin": this.userPick === null,
-        "fa-hand-rock-o": this.userPick === "rock",
-        "fa-hand-paper-o": this.userPick === "paper",
-        "fa-hand-scissors-o": this.userPick === "scissors"
-      };
+  methods:{
+    startGame(){
     },
-    computedRand: function () {
-      return {
-        "fa-circle-o-notch fa-spin": this.randPick === null,
-        "fa-hand-rock-o": this.randPick === "rock",
-        "fa-hand-paper-o": this.randPick === "paper",
-        "fa-hand-scissors-o": this.randPick === "scissors"
-      };
+    getComputerChoice() {
+      var vm = this, randomNumber  = Math.floor(Math.random() * 3)
+      if (randomNumber === 0) {
+        vm.computer = "rock";
+      } else if (randomNumber === 1) {
+        vm.computer = "paper";
+      } else {
+        vm.computer = "scissors";
+      }
     }
   }
-});
+}).$mount('#app')

@@ -8,32 +8,30 @@
 </head>
 <body>
 
+
     <div id="wrapper">
         <header>
             <h1>Rock Paper Scissors</h1>
         </header>
-    </div>
+    </div><br /><br />
+    <div id="app" style="text-align:center;">
+        <div v-if="isStart">
+            <button @click="megha = 'paper'; getComputerChoice()"> <img src="images/paper.png" id="choices"></button>
+            <button @click="megha = 'scissors'; getComputerChoice()">  <img src="images/scissors.png" id="choices"></button>
+            <button @click="megha = 'rock'; getComputerChoice()"><img src="images/rock.png" id="choices"></button>
+            <br /><br />
 
-
-    <form action="" method="post" style="text-align:center;">
-
-        <p>Your Choice:</p>
-        <div class="choices">
-        <div class="choice" id="r">
-        <p><img src="images/rock.png"><input type="radio" value="rock" name="playerthrows"  />
+            v.s
+            {{computer ? computer : 'Computer'}}
+            <br>
+            <div v-if="megha != '' && computer != ''">
+                {{determineWinner}}
+            </div>
         </div>
-        <div class="choice" id="p">
-                <img src="images/paper.png"><input type="radio" value="paper" name="playerthrows"  />
-            </div>
-            <div class="choice" id="s">
-                <img src="images/scissors.png"><input type="radio" value="scissors" name="playerthrows" />
-            </div>
-        </p>
-        <p><input type="submit" value="Play"></p>
-
-            </div>
-            </form>
-
+        <div v-else>
+            <button @click="isStart = !isStart">Start Game</button>
+        </div>
+    </div>
     <script type="text/javascript" src="js/vue.js"></script>
     <script "text/javascript" src="js/index.js"></script>
 </body>
